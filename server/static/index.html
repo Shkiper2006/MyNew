@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VDS Messenger</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>VDS Messenger</h1>
+      <p class="subtitle">Локальный мессенджер с комнатами, чатами и голосом</p>
+    </header>
+
+    <section id="auth-section" class="card">
+      <h2>Вход / Регистрация</h2>
+      <div class="auth-forms">
+        <form id="login-form">
+          <h3>Вход</h3>
+          <label>
+            Никнейм
+            <input type="text" id="login-username" required minlength="3" />
+          </label>
+          <label>
+            Пароль
+            <input type="password" id="login-password" required minlength="6" />
+          </label>
+          <button type="submit">Войти</button>
+        </form>
+        <form id="register-form">
+          <h3>Регистрация</h3>
+          <label>
+            Никнейм
+            <input type="text" id="register-username" required minlength="3" />
+          </label>
+          <label>
+            Пароль
+            <input type="password" id="register-password" required minlength="6" />
+          </label>
+          <button type="submit">Создать аккаунт</button>
+        </form>
+      </div>
+      <div id="auth-message" class="message"></div>
+    </section>
+
+    <section id="dashboard" class="hidden">
+      <div class="toolbar">
+        <div>
+          <span id="current-user" class="badge"></span>
+          <button id="logout-button">Выйти</button>
+        </div>
+        <div id="status-message" class="message"></div>
+      </div>
+
+      <div id="dashboard-grid">
+        <section class="card">
+          <h2>Комнаты</h2>
+          <ul id="room-list" class="list"></ul>
+          <form id="create-room-form" class="inline-form">
+            <input type="text" id="room-name" placeholder="Название комнаты" required />
+            <select id="room-type">
+              <option value="text">Текстовый чат</option>
+              <option value="voice">Голосовой чат</option>
+            </select>
+            <button type="submit">Создать</button>
+          </form>
+        </section>
+
+        <section class="card">
+          <h2>Пользователи</h2>
+          <ul id="user-list" class="list"></ul>
+        </section>
+
+        <section class="card">
+          <h2>Приглашения</h2>
+          <ul id="invite-list" class="list"></ul>
+        </section>
+      </div>
+    </section>
+
+    <section id="chat-view" class="hidden">
+      <div class="toolbar">
+        <button id="back-button">Список каналов</button>
+        <h2 id="chat-title"></h2>
+      </div>
+
+      <div id="chat-layout">
+        <div class="card" id="chat-panel">
+          <div id="chat-messages" class="messages"></div>
+          <form id="message-form" class="message-form">
+            <textarea id="message-input" placeholder="Введите сообщение..."></textarea>
+            <div class="message-actions">
+              <input type="file" id="file-input" multiple />
+              <div class="emoji-bar" id="emoji-bar"></div>
+              <button type="submit">Отправить</button>
+            </div>
+          </form>
+          <div class="invite-panel">
+            <h4>Пригласить пользователя</h4>
+            <ul id="room-invite-list" class="list"></ul>
+          </div>
+        </div>
+
+        <div class="card" id="voice-panel">
+          <h3>Голосовой чат</h3>
+          <p class="hint">Микрофон включается автоматически.</p>
+          <label>
+            Устройство ввода
+            <select id="audio-device"></select>
+          </label>
+          <div class="meter">
+            <span>Активность микрофона</span>
+            <div class="meter-bar">
+              <div id="mic-level" class="meter-fill"></div>
+            </div>
+          </div>
+          <button id="share-screen">Демонстрация экрана</button>
+          <div id="voice-status" class="message"></div>
+          <div id="remote-media"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
