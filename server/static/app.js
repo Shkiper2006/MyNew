@@ -410,6 +410,9 @@ async function setupWebSocket() {
 }
 
 async function populateAudioDevices() {
+  if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
+    throw new Error("Ваш браузер не поддерживает доступ к устройствам ввода.");
+  }
   const devices = await navigator.mediaDevices.enumerateDevices();
   audioDeviceSelect.innerHTML = "";
   devices
@@ -423,6 +426,9 @@ async function populateAudioDevices() {
 }
 
 async function getLocalStream() {
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    throw new Error("Ваш браузер не поддерживает доступ к микрофону.");
+  }
   const deviceId = audioDeviceSelect.value;
   const constraints = {
     audio: deviceId ? { deviceId: { exact: deviceId } } : true,
@@ -454,6 +460,9 @@ function startMicMeter(stream) {
 
 async function startVoiceChat(room) {
   try {
+    if (!navigator.mediaDevices) {
+      throw new Error("Доступ к микрофону требует HTTPS или localhost.");
+    }
     await populateAudioDevices();
     state.localStream = await getLocalStream();
     startMicMeter(state.localStream);
