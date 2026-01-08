@@ -19,7 +19,7 @@ DB_PATH = os.path.join(os.path.dirname(__file__), "DB.dat")
 INVITE_TIMEOUT_SECONDS = 5 * 60
 INVITE_CLEANUP_INTERVAL = 10
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+pwd_context = CryptContext(schemes=["pbkdf2_sha256"], deprecated="auto")
 
 
 @asynccontextmanager
