@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyNew Chat</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <div>
+          <h1>MyNew Chat</h1>
+          <p class="subtitle">Вход, комнаты, текст и голосовые каналы</p>
+        </div>
+        <div class="server-config">
+          <label>
+            Сервер
+            <input id="serverUrl" type="text" value="http://localhost:8000" />
+          </label>
+        </div>
+      </header>
+
+      <main>
+        <section id="authView" class="card auth">
+          <div>
+            <h2>Вход</h2>
+            <form id="loginForm" class="stack">
+              <input id="loginUsername" type="text" placeholder="Имя пользователя" required />
+              <input id="loginPassword" type="password" placeholder="Пароль" required />
+              <button type="submit">Войти</button>
+            </form>
+          </div>
+          <div>
+            <h2>Регистрация</h2>
+            <form id="registerForm" class="stack">
+              <input id="registerUsername" type="text" placeholder="Имя пользователя" required />
+              <input id="registerPassword" type="password" placeholder="Пароль (мин. 6)" required />
+              <button type="submit" class="secondary">Создать аккаунт</button>
+            </form>
+          </div>
+        </section>
+
+        <section id="chatView" class="chat hidden">
+          <aside class="sidebar">
+            <div class="panel">
+              <h3>Пользователи</h3>
+              <ul id="userList" class="list"></ul>
+            </div>
+            <div class="panel">
+              <h3>Комнаты</h3>
+              <form id="roomForm" class="stack">
+                <input id="roomName" type="text" placeholder="Название комнаты" required />
+                <input id="roomInvite" type="text" placeholder="Пригласить пользователя (опц.)" />
+                <button type="submit">Создать комнату</button>
+              </form>
+              <ul id="roomList" class="list"></ul>
+            </div>
+            <div class="panel">
+              <h3>Приглашения</h3>
+              <ul id="inviteList" class="list"></ul>
+            </div>
+          </aside>
+
+          <section class="chat-area">
+            <header class="chat-header">
+              <div>
+                <h2 id="roomTitle">Выберите комнату</h2>
+                <p id="roomMeta" class="subtitle">Здесь появятся сообщения и голосовой чат</p>
+              </div>
+              <button id="backToRooms" class="ghost">Список каналов</button>
+            </header>
+
+            <div class="chat-body">
+              <div id="messageList" class="messages"></div>
+              <div id="emptyState" class="empty-state">
+                Выберите комнату или создайте новую, чтобы начать общение.
+              </div>
+            </div>
+
+            <div class="composer" id="composer">
+              <div class="composer-top">
+                <div class="emoji-bar" id="emojiBar"></div>
+                <input id="messageInput" type="text" placeholder="Сообщение..." />
+                <label class="file-input">
+                  Файлы
+                  <input id="fileInput" type="file" multiple />
+                </label>
+              </div>
+              <div class="composer-actions">
+                <button id="sendMessage">Отправить</button>
+              </div>
+            </div>
+
+            <div class="voice-panel">
+              <div>
+                <h3>Голосовой чат</h3>
+                <p class="subtitle">Микрофон включается автоматически при входе в комнату</p>
+              </div>
+              <div class="voice-controls">
+                <label>
+                  Устройство ввода
+                  <select id="micSelect"></select>
+                </label>
+                <div class="mic-status">
+                  <span id="micIndicator" class="dot offline"></span>
+                  <span id="micLabel">Микрофон выключен</span>
+                </div>
+                <div class="meter">
+                  <div id="micMeter" class="meter-fill"></div>
+                </div>
+                <div class="voice-buttons">
+                  <button id="toggleMic" class="secondary">Выключить микрофон</button>
+                  <button id="shareScreen">Демонстрация экрана</button>
+                </div>
+                <div id="screenStatus" class="subtitle"></div>
+              </div>
+            </div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
